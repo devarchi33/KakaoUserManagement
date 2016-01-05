@@ -20,8 +20,13 @@ public class GetKakaoLoginCode {
     private RestTemplate restTemplate;
 
     public void getCode() {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(KakaoConfig.class);
-        ConfigurableEnvironment env = ctx.getEnvironment();
+        ConfigurableEnvironment env = null;
+        try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(KakaoConfig.class)) {
+            ctx.registerShutdownHook();
+            env = ctx.getEnvironment();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         String kakaoLoginCodeUrl = env.getProperty("url.kakao.login.code");
         String kakaoRestKey = env.getProperty("rest.key");
@@ -31,6 +36,7 @@ public class GetKakaoLoginCode {
         System.out.println("Url: " + kakaoLoginCodeUrl);
         System.out.println("Key: " + kakaoRestKey);
         System.out.println("reUri: " + redirectUri);
+        System.out.println();
 
         HttpHeaders headers = new HttpHeaders();
 
