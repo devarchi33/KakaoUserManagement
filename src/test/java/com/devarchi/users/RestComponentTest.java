@@ -16,16 +16,22 @@ import static org.junit.Assert.assertNotNull;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {RestConfig.class})
-public class RestConfigTest {
+public class RestComponentTest {
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
     @Autowired
-    GetKakaoLoginCode getKakaoLoginCode;
+    private GetKakaoLoginCode getKakaoLoginCode;
 
     @Test
     public void objectNotNull() {
         assertNotNull(restTemplate);
         assertNotNull(getKakaoLoginCode);
+    }
+
+    @Test
+    public void getKakaoLoginCodeTest() {
+        getKakaoLoginCode.getCode();
     }
 }

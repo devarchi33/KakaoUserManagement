@@ -1,5 +1,6 @@
 package com.devarchi.users.config;
 
+import com.devarchi.users.KakaoPropertyProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,4 +17,10 @@ public class RestConfig {
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
+
+    @Bean
+    public KakaoPropertyProvider getKakaoPropertyProvider() {
+        return new KakaoPropertyProvider();
+    }
+
 }

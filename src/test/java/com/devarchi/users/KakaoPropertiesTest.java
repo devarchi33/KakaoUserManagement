@@ -18,13 +18,19 @@ import static org.junit.Assert.*;
 public class KakaoPropertiesTest {
 
     @Autowired
-    KakaoConfig kakaoConfig;
+    private KakaoPropertyProvider kp;
 
     @Test
-    public void getRestKey() {
-        String key = kakaoConfig.getKakaoRestKey();
+    public void getKakaoProperties() {
+        String key = kp.getKakaoRestKey();
+        String kakaoLoginCodeUrl = kp.getKakaoLoginCodeUrl();
+        String redirectUri = kp.getRedirectUri();
         System.out.println();
         System.out.println("Rest Key: " + key);
+        System.out.println("kakaoLoginCodeUrl: " + kakaoLoginCodeUrl);
+        System.out.println("redirect.uri: " + redirectUri);
         assertEquals("2755f44859a95fb5e2ebd4aa9de67f4b", key);
+        assertEquals("https://kauth.kakao.com/oauth/authorize", kakaoLoginCodeUrl);
+        assertEquals("localhost:8080", redirectUri);
     }
 }
